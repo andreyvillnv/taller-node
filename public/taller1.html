@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Visitas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 1.5em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contador de Visitas</h1>
+        <p id="contador">Cargando...</p>
+    </div>
+
+    <script>
+        // Función para obtener el contador de visitas desde el servidor
+       async  function obtenerContador() {
+            try {
+                const response = await fetch(`/visitas`);
+                const data =  await response.text();
+                document.getElementById('contador').textContent = data;
+            } catch (error) {
+                console.error('Error al obtener el contador:', error);
+                document.getElementById('contador').textContent = 'Error al cargar el contador.';
+            }
+        }
+
+        // Llamar a la función al cargar la página
+        obtenerContador();
+    </script>
+</body>
+</html>
